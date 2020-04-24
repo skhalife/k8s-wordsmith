@@ -4,6 +4,9 @@ on:
   push:
     branches: [ master ]
 
+env:
+  VERSION: ${{ github.sha }}
+
 jobs:
 
   build:
@@ -11,10 +14,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Set version & login into registry
-      run: |
-        export VERSION=$(date +%s)
-        docker login docker.pkg.github.com --username skhalife --password ${{ secrets.GITHUB_TOKEN }}
+    - name: Login into registry
+      run:  docker login docker.pkg.github.com --username skhalife --password ${{ secrets.GITHUB_TOKEN }}
     - uses: actions/checkout@v2
     - name: Build the Docker image for web/
       run: |

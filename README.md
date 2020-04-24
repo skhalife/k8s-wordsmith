@@ -10,8 +10,6 @@ The demo app runs across three containers:
 
 - [web](web/Dockerfile) - a Go web application which calls the API and builds words into sentences:
 
-![The Wordsmith app running in Kubernetes on Docker for Mac](img/dockercon-barcelona-logo.svg)
-
 ## Build
 
 The only requirement to build and run the app from source is Docker. Clone this repo and use Docker Compose to build all the images:

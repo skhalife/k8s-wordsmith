@@ -11,20 +11,23 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build the Docker image
-    - run: |
-        VERSION=$(date +%s)
+    - name: Set version & login into registry
+      run: |
+        export VERSION=$(date +%s)
         docker login docker.pkg.github.com --username skhalife --password ${{ secrets.GITHUB_TOKEN }}
-    - run: |
+    - uses: actions/checkout@v2
+    - name: Build the Docker image for web/
+      run: |
         cd web/
         docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/web:${VERSION}
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/web:${VERSION}
-    - run: |
+    - name: Build the Docker image for words/
+      run: |
         cd ../words
         docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
-    - run: |
+    - name: Build the Docker image for db/
+      run: |
         cd ../db
         docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}

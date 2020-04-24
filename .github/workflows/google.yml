@@ -71,7 +71,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |
-        gcloud --version
+        gcloud config set container/use_client_certificate True
         gcloud container clusters get-credentials $GKE_CLUSTER --region us-central1 --project sk-demo-project
         kubectl create -f kube-deployment.yml
         kubectl get pods

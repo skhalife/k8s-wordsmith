@@ -16,5 +16,10 @@ jobs:
       run: |
         VERSION=$(date +%s)
         docker login docker.pkg.github.com --username skhalife --password ${{ secrets.GITHUB_TOKEN }}
-        docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/app:${VERSION}
-        docker push docker.pkg.github.com/skhalife/k8s-wordsmith/app:${VERSION}
+        docker build . --file web/Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/web:${VERSION}
+        docker push docker.pkg.github.com/skhalife/k8s-wordsmith/api:${VERSION}
+        docker build . --file words/Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
+        docker push docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
+        docker build . --file db/Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}
+        docker push docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}
+

@@ -24,12 +24,12 @@ jobs:
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/web:${VERSION}
     - name: Build the Docker image for words/
       run: |
-        cd ../words
+        cd words/
         docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/words:${VERSION}
     - name: Build the Docker image for db/
       run: |
-        cd ../db
+        cd db/
         docker build . --file Dockerfile --tag docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}
         docker push docker.pkg.github.com/skhalife/k8s-wordsmith/db:${VERSION}
 
